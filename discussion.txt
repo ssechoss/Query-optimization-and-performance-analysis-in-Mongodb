@@ -1,0 +1,41 @@
+the choice of index:
+	In my database, the project has the attributes of project_num(unique value), pname, start_date, array of members, array of files.
+	Most of my read, write, aggregate operations are based on start_date condition. So I choose start_date as the single index, as it can narrow down my search range. 
+
+	When I do the operations, the secondly frequently used attribute is members.age. So when using compound index, I choose start_date and members.age.
+
+
+All read operations:
+	average run time without index is 0m8.044s, average run time with single index is 0m3.616s, average run time with compound indexes is 0m3.521s.
+
+	Firstly, using index or indexes can improve performance. 
+		when do the read operations, with index or indexes, it does not need to scan all the documents, but only some of the fields, so obviously with index or indexes can improve performance.
+
+	Secondly, with single index the performance is only about one third of without index. 
+		Because I always search the projects based on a range of start_date, though it can narrow down the range, but sometimes the range is still relatively big, so the performance can only be improved in limited times.
+		Solution: when do the operations, narrow my search range of start_date to very small, then the index will work more obviously.
+
+	Thirdly, using compound indexes, the performance is improved a little bit than using single one. 
+		Because my projects number is relatively big, but the number of my members in each project is at most 10. So the index of members.age logically can improve the performance. However because of the size of the members, it can improve the performance only a little bit. 
+		Solution: in each project, expand the number of the members signficantly, then the comparision will be more clear.
+
+
+A mix of read, write, aggregation operations:
+	(the relatively frequency of read, write and aggregate is 2:3:2)
+
+	average run time without index is 0m14.972s, average run time with single index is 0m12.661s, average run time with compound indexes is 0m13.567s.
+
+	firstly, with single index the performance is about 20% quciker than without index.
+		Write is similar as read, the performance will be better with index. The reasons about the performances between these three approaches are the same as I discussed above.
+		As I tested, the aggregate takes longer time than read and write. And there is only a little improvement when using index. That's the reason that mix performances do not have big differences.
+
+	Secondly, when aggregate, using index or indexes works a little better than using no index. 
+		The index will only optimime the pipeline "match" step, it is only part of aggregation. So with index or indexes it only optimizes the performance a little.
+
+	Thirdly, when aggregate, using single index works a bit better than compound indexes.
+		When aggregate, My match part only includes the first index. So when using compound indexes, actually I only use the prefix of the compound indexes. When do the search, the compound indexes do twice B tree search, so performance of using the prefix of compound indexes is not efficient as using single index. Using single index performs better.
+
+
+
+
+

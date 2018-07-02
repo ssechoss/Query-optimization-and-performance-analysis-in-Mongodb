@@ -1,0 +1,98 @@
+all read operations:
+	read without index:
+		first time run:
+			real	0m8.042s
+			user	0m0.103s
+			sys	0m0.025s
+		second time run:
+			real	0m8.029s
+			user	0m0.104s
+			sys	0m0.028s
+		third time run:
+			real	0m8.062s
+			user	0m0.104s
+			sys	0m0.028s
+		average real time is: 0m8.044s
+
+	read with single index:
+		first time run:
+			real	0m3.627s
+			user	0m0.105s
+			sys	0m0.027s
+		second time run:
+			real	0m3.596s
+			user	0m0.103s
+			sys	0m0.027s
+		third time run:
+			real	0m3.625s
+			user	0m0.105s
+			sys	0m0.027s
+		average real time is: 0m3.616s
+
+	read with compound indexes:
+		first time run:
+			real	0m3.526s
+			user	0m0.105s
+			sys	0m0.027s
+		second time run:
+			real	0m3.491s
+			user	0m0.104s
+			sys	0m0.026s			
+		third time run:
+			real	0m3.547s
+			user	0m0.108s
+			sys	0m0.027s
+		average real time is: 0m3.521s
+
+	the performance with index is better than that without index, but the performance of 
+	single index only a little bit better than compound indexes
+
+
+a mix of aggregate, write and read operations:
+	operations without index:
+		first time run:
+			real	0m14.986s
+			user	0m2.082s
+			sys	0m0.315s
+		second time run:
+			real	0m15.088s
+			user	0m2.110s
+			sys	0m0.319s
+		third time run:
+			real	0m14.841s
+			user	0m2.100s
+			sys	0m0.313s
+		average real time is: 0m14.972s
+
+	operations with single index:
+		first time run:
+			real	0m12.472s
+			user	0m2.091s
+			sys	0m0.317s
+		second time run:
+			real	0m12.859s
+			user	0m2.154s
+			sys	0m0.318s
+		third time run:
+			real	0m12.653s
+			user	0m2.046s
+			sys	0m0.313s
+		average real time is: 0m12.661s
+
+	operations with compound indexes:
+		first time run:
+			real	0m13.462s
+			user	0m2.078s
+			sys	0m0.314s
+		second time run:
+			real	0m13.725s
+			user	0m2.018s
+			sys	0m0.311s
+		third time run:
+			real	0m13.513s
+			user	0m2.051s
+			sys	0m0.310s
+		average real time is: 0m13.567s
+
+	the performance with index is better than without index, but compound indexes performs worse than single one.
+
